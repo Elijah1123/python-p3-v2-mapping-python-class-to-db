@@ -17,7 +17,7 @@ class TestDepartment:
         Department.create_table()
         assert (CURSOR.execute("SELECT * FROM departments"))
 
-    def test_drops_table(self):
+    def test_drops_table(>self):
         '''contains method "drop_table()" that drops table "departments" if it exists.'''
 
         sql = """
@@ -77,14 +77,12 @@ class TestDepartment:
         department2 = Department.create("Marketing", "Building B, 3rd Floor")
         id2 = department2.id
 
-        # Assign new values for name and location
         department2.name = "Sales and Marketing"
         department2.location = "Building B, 4th Floor"
 
-        # Persist the updated name and location values
+       
         department2.update()
 
-        # assert department1 row was not updated, department1 object state not updated
         sql = """
             SELECT * FROM departments
             WHERE id = ?
@@ -94,7 +92,7 @@ class TestDepartment:
                 == (id1, "Human Resources", "Building C, East Wing")
                 == (department1.id, department1.name, department1.location))
 
-        # assert department2 row was updated, department2 object state is correct
+     
         sql = """
             SELECT * FROM departments
             WHERE id = ?
@@ -122,7 +120,7 @@ class TestDepartment:
             WHERE id = ?
         """
         row = CURSOR.execute(sql, (id1,)).fetchone()
-        # assert department1 row not deleted
+      
         assert (row)
 
         sql = """
@@ -130,5 +128,5 @@ class TestDepartment:
             WHERE id = ?
         """
         row = CURSOR.execute(sql, (id2,)).fetchone()
-        # assert department2 row is deleted
+       
         assert (row is None)
